@@ -6,9 +6,9 @@ app = create_app()
 celery = app.celery_app
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+# @app.get("/")
+# async def root():
+#     return {"message": "Hello World"}
 
 
 @celery.task
