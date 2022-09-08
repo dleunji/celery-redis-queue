@@ -1,4 +1,4 @@
-from logger import Logger
+from listener.logger import Logger
 
 class CeleryEventsHandler:
   def __init__(self, celery_app, verbose_logging=False):
@@ -52,14 +52,15 @@ class CeleryEventsHandler:
 
   def start_listening(self):
       with self._app.connection() as connection:
-          recv = self._app.events.Receiver(connection, handlers={
-              'task-sent': self._on_task_sent,
-              'task-received': self._on_task_received,
-              'task-started': self._on_task_started,
-              'task-succeeded': self._on_task_succeeded,
-              'task-failed': self._on_task_failed,
-              'task-rejected': self._on_task_rejected,
-              'task-revoked': self._on_task_revoked,
-              'task-retried': self._on_task_retried
-          })
-          recv.capture(limit=None, timeout=10)
+        recv = self._app.events.Receiver(connection, handlers={
+            'task-sent': self._on_task_sent,
+            'task-received': self._on_task_received,
+            'task-started': self._on_task_started,
+            'task-succeeded': self._on_task_succeeded,
+            'task-failed': self._on_task_failed,
+            'task-rejected': self._on_task_rejected,
+            'task-revoked': self._on_task_revoked,
+            'task-retried': self._on_task_retried
+        })
+        recv.capture(limit=None, timeout=10)
+        print("connected..2")

@@ -49,6 +49,8 @@ class Logger:
 
         for child in task.children:
             print('t{}n'.format(str(child)))
+        
+        print("")
 
     def _to_datetime(self, timestamp):
         return dt.fromtimestamp(timestamp) if timestamp is not None else None 
